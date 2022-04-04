@@ -24,7 +24,7 @@ func main() {
 	client, _ := bigquery.NewClient(ctx, projectID)
 	stmt := `SELECT to_json_string(inputs) FROM ` +
 		"`bigquery-public-data.bitcoin_blockchain.transactions`" +
-		` LIMIT 1`
+		` where array_length(inputs) = 2 LIMIT 1`
 	q := client.Query(stmt)
 	job, _ := q.Run(ctx)
 	status, _ := job.Wait(ctx)
@@ -48,10 +48,11 @@ func main() {
 			fmt.Println(msg.Error() + ` at ` + time.Now().In(tz).Format("2009-03-03 20:20:20"))
 			return 
 		}
-
+        fmt.Println("============big query row array data====================")
 		fmt.Println(row[0])
 		input_str := fmt.Sprintf("%v", row[0])
 		err = json.Unmarshal([]byte(input_str), &Inputs)
+		fmt.Println("=============go slice element data====================")
 		for _, input := range Inputs {
 			fmt.Println("input_script_bytes :", input.Input_script_bytes)
 			fmt.Println("input_script_string :", input.Input_script_string)
