@@ -1,0 +1,5 @@
+============big query row array data====================
+["1Ng4YU2e2H3E86syX2qrsmD9opBHZ42vCF","1BDm6og7xXmMy4c5k7VRA8QBtcBhsWtyED"]
+=============go slice element data====================
+Item : 0 , data  : 1Ng4YU2e2H3E86syX2qrsmD9opBHZ42vCF
+Item : 1 , data  : 1BDm6og7xXmMy4c5k7VRA8QBtcBhsWtyED
