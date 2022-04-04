@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	projectID := `bqaccess-346102`
+	projectID := `bqaccess-346103`
 	ctx := context.Background()
 	client, _ := bigquery.NewClient(ctx, projectID)
 	stmt := `SELECT 	to_json_string(addresses)   FROM ` +
@@ -23,7 +23,7 @@ func main() {
 		msg := fmt.Errorf("bigquery.Value error : %v", err)
 		var tz, _ = time.LoadLocation("Asia/Taipei")
 		fmt.Println(msg.Error() + ` at ` + time.Now().In(tz).Format("2009-03-03 20:20:20"))
-		return 
+		return
 	}
 	it, _ := job.Read(ctx)
 	for {
@@ -36,17 +36,17 @@ func main() {
 			msg := fmt.Errorf("bigquery.Value error : %v", err)
 			var tz, _ = time.LoadLocation("Asia/Taipei")
 			fmt.Println(msg.Error() + ` at ` + time.Now().In(tz).Format("2009-03-03 20:20:20"))
-			return 
+			return
 		}
-        fmt.Println("============big query row array data====================")
+		fmt.Println("============big query row array data====================")
 		fmt.Println(row[0])
 		address_str := fmt.Sprintf("%v", row[0])
-		 str1 := strings.Split(address_str, ",")
+		str1 := strings.Split(address_str, ",")
 		fmt.Println("=============go slice element data====================")
 		for i, str := range str1 {
 			addr := strings.Trim(str, "\"[]")
-			fmt.Println("Item :" ,i, ", data  :", addr)
-		} 
+			fmt.Println("Item :", i, ", data  :", addr)
+		}
 	}
 
 }
